@@ -13,10 +13,12 @@ namespace EasyExceptionHandling
         {
             SetUpExceptionHandling();
 
-            while (true)
+            var name = string.Empty;
+
+            while (name != "exit")
             {
                 Console.WriteLine("Tell me your name:");
-                var name = Console.ReadLine();
+                name = Console.ReadLine();
 
                 var fortuneTeller = new FortuneCookie(name);
                 var fortune = fortuneTeller.TellMeMyFortune();

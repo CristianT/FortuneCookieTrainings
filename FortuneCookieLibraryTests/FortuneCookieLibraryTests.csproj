@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="EnumerableExtensionsTests.cs" />
+    <Compile Include="FortuneCookieTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ namespace FortuneCookieLibrary
 
         public FortuneCookie(string name)
         {
-            if (name.Length == 0)
+            if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("The name cannot be empty.", "name");
             }
@@ -20,16 +20,35 @@ namespace FortuneCookieLibrary
             this._name = name;
         }
 
+        public string TellMeMyFortune()
+        {
+            this.CheckFortune();
+            
+            return this.fortunes.PickRandom();
+        }
+
+        public bool WillIMarryARichPerson()
+        {
+            // This is a very complex calculation
+            var entropy = DateTime.Now.Millisecond * Math.Pow(3, 5) / Math.Log(this._name.Length);
+
+            var result = true;
+            for (int i = 0; i < (entropy + 1) * 5; i++)
+            {
+                result &= this.WillIMarryARichPerson();
+            }
+
+            return result;
+        }
+
         private static Random randomObject = new Random();
 
-        public string TellMeMyFortune()
+        public void CheckFortune()
         {
             if (randomObject.Next(5) == 1)
             {
                 throw new BadLuckException("No fortune for you today.");
             }
-            
-            return this.fortunes.PickRandom();
         }
 
         #region Secret fortune 

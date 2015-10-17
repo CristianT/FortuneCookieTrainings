@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BadLuckException.cs" />
+    <Compile Include="CheckExtensions.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FortuneCookie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
