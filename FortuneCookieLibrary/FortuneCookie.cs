@@ -20,6 +20,19 @@ namespace FortuneCookieLibrary
             this._name = name;
         }
 
+        private static Random randomObject = new Random();
+
+        public string TellMeMyFortune()
+        {
+            if (randomObject.Next(5) == 1)
+            {
+                throw new BadLuckException("No fortune for you today.");
+            }
+            
+            return this.fortunes.PickRandom();
+        }
+
+        #region Secret fortune 
         private readonly IEnumerable<string> fortunes = new List<string>()
         {
             "A friend asks only for your time not your money.",
@@ -73,13 +86,6 @@ namespace FortuneCookieLibrary
             "Nothing astonishes men so much as common sense and plain dealing.",
             "Its amazing how much good you can do if you dont care who gets the credit."
         };
-
-
-
-
-        public string TellMeMyFortune()
-        {
-
-        }
+        #endregion
     }
 }
