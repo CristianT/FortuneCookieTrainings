@@ -34,7 +34,7 @@ namespace EasyExceptionHandling
         {
             AppDomain.CurrentDomain.UnhandledException += (object sender, UnhandledExceptionEventArgs e) =>
             {
-                Console.WriteLine("I predict bad fortune during the next seconds...");
+                Console.WriteLine("I predict bad fortune during the next seconds... press enter to see it...");
                 Console.ReadLine();
 
                 Environment.FailFast("Unable to recover from such bad luck!");
