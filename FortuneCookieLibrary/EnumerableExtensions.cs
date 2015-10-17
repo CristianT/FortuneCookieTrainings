@@ -12,7 +12,7 @@ namespace FortuneCookieLibrary
         {
             if (source == null)
             {
-                throw new ArgumentException("The list cannot be empty.", "source");
+                throw new ArgumentException("The list cannot be null.", "source");
             }
 
             return source.PickRandom(1).Single();
@@ -22,7 +22,7 @@ namespace FortuneCookieLibrary
         {
             if (source == null)
             {
-                throw new ArgumentException("The list cannot be empty.", "source");
+                throw new ArgumentException("The list cannot be null.", "source");
             }
 
             return source.Shuffle().Take(count);
@@ -32,7 +32,7 @@ namespace FortuneCookieLibrary
         {
             if (source == null)
             {
-                throw new ArgumentException("The list cannot be empty.", "source");
+                throw new ArgumentException("The list cannot be null.", "source");
             }
 
             return source.OrderBy(x => Guid.NewGuid());
