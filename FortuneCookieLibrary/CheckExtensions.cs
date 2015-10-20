@@ -33,7 +33,7 @@ namespace FortuneCookieLibrary
 
             if (obj.Length == 0)
             {
-                throw new ArgumentNullException("String parameter cannot be empty.", name);
+                throw new ArgumentException("String parameter cannot be empty.", name);
             }
         }
 
