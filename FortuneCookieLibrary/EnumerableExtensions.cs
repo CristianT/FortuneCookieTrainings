@@ -10,30 +10,21 @@ namespace FortuneCookieLibrary
     {
         public static T PickRandom<T>(this IEnumerable<T> source)
         {
-            if (source == null)
-            {
-                throw new ArgumentException("The list cannot be null.", "source");
-            }
+            source.CheckNotNull("source");
 
-            return source.PickRandom(1).Single();
+            return source.PickRandom(1).SingleOrDefault();
         }
 
         public static IEnumerable<T> PickRandom<T>(this IEnumerable<T> source, int count)
         {
-            if (source == null)
-            {
-                throw new ArgumentException("The list cannot be null.", "source");
-            }
+            source.CheckNotNull("source");
 
             return source.Shuffle().Take(count);
         }
 
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
         {
-            if (source == null)
-            {
-                throw new ArgumentException("The list cannot be null.", "source");
-            }
+            source.CheckNotNull("source");
 
             return source.OrderBy(x => Guid.NewGuid());
         }

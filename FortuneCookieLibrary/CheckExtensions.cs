@@ -18,7 +18,7 @@ namespace FortuneCookieLibrary
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("Parameter cannot be null.", name);
+                throw new ArgumentNullException(name, "Parameter cannot be null.");
             }
         }
 

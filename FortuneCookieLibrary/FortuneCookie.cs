@@ -12,7 +12,9 @@ namespace FortuneCookieLibrary
 
         public FortuneCookie(string name)
         {
-            if (string.IsNullOrEmpty(name))
+            name.CheckNotNull("name");
+
+            if (name.Length == 0)
             {
                 throw new ArgumentException("The name cannot be empty.", "name");
             }
@@ -29,19 +31,10 @@ namespace FortuneCookieLibrary
 
         public bool WillIMarryARichPerson()
         {
-            // This is a very complex calculation
-            var entropy = DateTime.Now.Millisecond * Math.Pow(3, 5) / Math.Log(this._name.Length);
-
-            var result = true;
-            for (int i = 0; i < (entropy + 1) * 5; i++)
-            {
-                result &= this.WillIMarryARichPerson();
-            }
-
-            return result;
+            return false;
         }
 
-        private static Random randomObject = new Random();
+        private static readonly Random randomObject = new Random();
 
         public void CheckFortune()
         {
