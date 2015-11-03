@@ -24,7 +24,7 @@ namespace MyFortuneCookie
                 var fortuneTeller = new FortuneCookie(name);
 
                 Log("Reading fortunes...");
-                var fortunes = fortuneTeller.TellMeMyManyFortunes().Where(s => s.EndsWith(".")).Take(2).ToList();
+                var fortunes = fortuneTeller.TellMeMyManyFortunes();
 
                 Log("Fortunes prepared...");
 
