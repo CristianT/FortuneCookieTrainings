@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FortuneCookieLibrary
 {
-    public class FortuneCookie
+    public class FortuneCookie : IDisposable
     {
         private readonly string _name;
+
+        private StreamReader _reader = null;
+        private FileStream _file = null;
 
         public FortuneCookie(string name)
         {
@@ -18,6 +22,9 @@ namespace FortuneCookieLibrary
             }
 
             this._name = name;
+
+            this._file = new FileStream("fortuneSecret.txt", FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            this._reader = new StreamReader(_file);
         }
 
         public string TellMeMyFortune()
@@ -49,6 +56,11 @@ namespace FortuneCookieLibrary
             {
                 throw new BadLuckException("No fortune for you today.");
             }
+        }
+
+        public void CloseFortune()
+        {
+            this._file.Close();
         }
 
         #region Secret fortune 
@@ -105,6 +117,42 @@ namespace FortuneCookieLibrary
             "Nothing astonishes men so much as common sense and plain dealing.",
             "Its amazing how much good you can do if you dont care who gets the credit."
         };
+        #endregion
+
+
+        #region Dispose pattern
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    this.CloseFortune();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~FortuneCookie() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
         #endregion
     }
 }

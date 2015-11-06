@@ -11,34 +11,36 @@ namespace MyFortuneCookie
     {
         static void Main(string[] args)
         {
-            SetUpExceptionHandling();
-
             var name = string.Empty;
 
             while (name != "exit")
             {
-                Console.WriteLine("Tell me your name:");
-                name = Console.ReadLine();
+                try
+                {
+                    while (string.IsNullOrEmpty(name))
+                    {
+                        Console.WriteLine("Tell me your name:");
+                        name = Console.ReadLine();
 
-                var fortuneTeller = new FortuneCookie(name);
-                var fortune = fortuneTeller.TellMeMyFortune();
+                        if (string.IsNullOrEmpty(name))
+                        {
+                            Console.WriteLine("Please enter a correct name.");
+                        }
+                    }
 
-                Console.WriteLine(fortune);
+                    var fortuneTeller = new FortuneCookie(name);
+                    var fortune = fortuneTeller.TellMeMyFortune();
+
+                    Console.WriteLine(fortune);
+                }
+                catch (BadLuckException)
+                {
+                    Console.WriteLine("Bad luck for now, try again.");
+                }
             }
 
             Console.WriteLine("Press a key to exit...");
             Console.ReadLine();
-        }
-
-        private static void SetUpExceptionHandling()
-        {
-            AppDomain.CurrentDomain.UnhandledException += (object sender, UnhandledExceptionEventArgs e) =>
-            {
-                Console.WriteLine("I predict bad fortune during the next seconds... press enter to see it...");
-                Console.ReadLine();
-
-                Environment.FailFast("Unable to recover from such bad luck!");
-            };
         }
     }
 }
